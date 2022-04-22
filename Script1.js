@@ -6,4 +6,6 @@
     var item = items[i];
     console.log(item, item.id)
     item.style.gridArea = item.id;
+
+    console.log("a");
   }
