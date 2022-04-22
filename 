@@ -1,0 +1,155 @@
+[1mdiff --git a/ChassPage1.html b/ChassPage1.html[m
+[1mindex 7f7e46a..ac8a280 100644[m
+[1m--- a/ChassPage1.html[m
+[1m+++ b/ChassPage1.html[m
+[36m@@ -15,77 +15,69 @@[m
+       <div id="g8" class="brown"></div>[m
+       <div id="h8" class="papaya-whip"></div>[m
+ [m
+[31m-      <div id="a7" class="brown"></div>[m
+[31m-      <div id="b7" class="papaya-whip"></div>[m
+[31m-      <div id="c7" class="brown"></div>[m
+[31m-      <div id="d7" class="papaya-whip"></div>[m
+[31m-      <div id="e7" class="brown"></div>[m
+[31m-      <div id="f7" class="papaya-whip"></div>[m
+[31m-      <div id="g7" class="brown"></div>[m
+[31m-      <div id="h7" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="a7" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="b7" class="brown"></div>[m
+[32m+[m[32m      <div id="c7" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="d7" class="brown"></div>[m
+[32m+[m[32m      <div id="e7" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="f7" class="brown"></div>[m
+[32m+[m[32m      <div id="g7" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="h7" class="brown"></div>[m
+ [m
+[31m-      <div class="a7"></div>[m
+[31m-      <div class="b7"></div>[m
+[31m-      <div class="c7"></div>[m
+[31m-      <div class="d7"></div>[m
+[31m-      <div class="e7"></div>[m
+[31m-      <div class="f7"></div>[m
+[31m-      <div class="g7"></div>[m
+[31m-      <div class="h7"></div>[m
+[32m+[m[32m      <div id="a6" class="brown"></div>[m
+[32m+[m[32m      <div id="b6" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="c6" class="brown"></div>[m
+[32m+[m[32m      <div id="d6" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="e6" class="brown"></div>[m
+[32m+[m[32m      <div id="f6" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="g6" class="brown"></div>[m
+[32m+[m[32m      <div id="h6" class="papaya-whip"></div>[m
+ [m
+[31m-      <div class="a6"></div>[m
+[31m-      <div class="b6"></div>[m
+[31m-      <div class="c6"></div>[m
+[31m-      <div class="d6"></div>[m
+[31m-      <div class="e6"></div>[m
+[31m-      <div class="f6"></div>[m
+[31m-      <div class="g6"></div>[m
+[31m-      <div class="h6"></div>[m
+[32m+[m[32m      <div id="a5" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="b5" class="brown"></div>[m
+[32m+[m[32m      <div id="c5" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="d5" class="brown"></div>[m
+[32m+[m[32m      <div id="e5" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="f5" class="brown"></div>[m
+[32m+[m[32m      <div id="g5" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="h5" class="brown"></div>[m
+ [m
+[31m-      <div class="a5"></div>[m
+[31m-      <div class="b5"></div>[m
+[31m-      <div class="c5"></div>[m
+[31m-      <div class="d5"></div>[m
+[31m-      <div class="e5"></div>[m
+[31m-      <div class="f5"></div>[m
+[31m-      <div class="g5"></div>[m
+[31m-      <div class="h5"></div>[m
+[32m+[m[32m      <div id="a4" class="brown"></div>[m
+[32m+[m[32m      <div id="b4" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="c4" class="brown"></div>[m
+[32m+[m[32m      <div id="d4" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="e4" class="brown"></div>[m
+[32m+[m[32m      <div id="f4" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="g4" class="brown"></div>[m
+[32m+[m[32m      <div id="h4" class="papaya-whip"></div>[m
+ [m
+[31m-      <div class="a4"></div>[m
+[31m-      <div class="b4"></div>[m
+[31m-      <div class="c4"></div>[m
+[31m-      <div class="d4"></div>[m
+[31m-      <div class="e4"></div>[m
+[31m-      <div class="f4"></div>[m
+[31m-      <div class="g4"></div>[m
+[31m-      <div class="h4"></div>[m
+[32m+[m[32m      <div id="a3" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="b3" class="brown"></div>[m
+[32m+[m[32m      <div id="c3" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="d3" class="brown"></div>[m
+[32m+[m[32m      <div id="e3" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="f3" class="brown"></div>[m
+[32m+[m[32m      <div id="g3" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="h3" class="brown"></div>[m
+ [m
+[31m-      <div class="a3"></div>[m
+[31m-      <div class="b3"></div>[m
+[31m-      <div class="c3"></div>[m
+[31m-      <div class="d3"></div>[m
+[31m-      <div class="e3"></div>[m
+[31m-      <div class="f3"></div>[m
+[31m-      <div class="g3"></div>[m
+[31m-      <div class="h3"></div>[m
+[32m+[m[32m      <div id="a2" class="brown"></div>[m
+[32m+[m[32m      <div id="b2" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="c2" class="brown"></div>[m
+[32m+[m[32m      <div id="d2" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="e2" class="brown"></div>[m
+[32m+[m[32m      <div id="f2" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="g2" class="brown"></div>[m
+[32m+[m[32m      <div id="h2" class="papaya-whip"></div>[m
+ [m
+[31m-      <div class="a2"></div>[m
+[31m-      <div class="b2"></div>[m
+[31m-      <div class="c2"></div>[m
+[31m-      <div class="d2"></div>[m
+[31m-      <div class="e2"></div>[m
+[31m-      <div class="f2"></div>[m
+[31m-      <div class="g2"></div>[m
+[31m-      <div class="h2"></div>[m
+[32m+[m[32m      <div id="a1" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="b1" class="brown"></div>[m
+[32m+[m[32m      <div id="c1" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="d1" class="brown"></div>[m
+[32m+[m[32m      <div id="e1" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="f1" class="brown"></div>[m
+[32m+[m[32m      <div id="g1" class="papaya-whip"></div>[m
+[32m+[m[32m      <div id="h1" class="brown"></div>[m
+ [m
+[31m-      <div class="a1"></div>[m
+[31m-      <div class="b1"></div>[m
+[31m-      <div class="c1"></div>[m
+[31m-      <div class="d1"></div>[m
+[31m-      <div class="e1"></div>[m
+[31m-      <div class="f1"></div>[m
+[31m-      <div class="g1"></div>[m
+[31m-      <div class="h1"></div>[m
+     </div>[m
+   </body>[m
+ </html>[m
+[1mdiff --git a/Script1.js b/Script1.js[m
+[1mindex 753eca7..b8c94ce 100644[m
+[1m--- a/Script1.js[m
+[1m+++ b/Script1.js[m
+[36m@@ -1,4 +1,5 @@[m
+ [m
+[32m+[m
+   var items = document.querySelectorAll(".container div");[m
+   console.log(items);[m
+   for (var i = 0; i < items.length; i++)[m
+[36m@@ -6,4 +7,4 @@[m
+     var item = items[i];[m
+     console.log(item, item.id)[m
+     item.style.gridArea = item.id;[m
+[31m-  }[m
+[32m+[m[32m  }[m
+\ No newline at end of file[m
