@@ -1,13 +1,13 @@
 
 
-  var items = document.querySelectorAll(".container div");
-  //console.log(items);
-  for (var i = 0; i < items.length; i++)
-  {
-    var item = items[i];
-    //console.log(item, item.id)
-    item.style.gridArea = item.id;
-  }
+  // var items = document.querySelectorAll(".container div");
+  // //console.log(items);
+  // for (var i = 0; i < items.length; i++)
+  // {
+  //   var item = items[i];
+  //   console.log(item.id)
+  //   item.style.gridArea = item.id;
+  // }
     
     //creates white pawns
     for (let i = 0; i < 8; i++)    
@@ -56,26 +56,18 @@
     createPiece('queen', 'Icons/black queen.svg', 'd8');  
 
     //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces chess pieces link
-
-    //on click logic
-  //   function clickHighlight(element) 
-  //   {
-  //     document.getElementById(element).onclick = function() { 
-  //     document.getElementById("h2").classList.remove('onClick');  
-  //     document.getElementById(element).classList.add('onClick');
-  //     }
-  // }
-  
-    // clickHighlight('h2');
-    // clickHighlight('g2');
+   
     window.onclick = e => {
-      console.log(e.target.id);  // to get the element
+      let elementId = e.target.id;      
+      var items = document.querySelectorAll(".container div");
+      for (var i = 0; i < items.length; i++)
+      {
+        var item = items[i];
+        item.classList.remove('onClick');
+      }
+      document.getElementById(elementId).classList.add('onClick');
   } 
 
-  //   window.onclick = e => {
-  //     document.getElementById(e).classList.remove('onClick');  
-  //     document.getElementById(e).classList.add('onClick');;
-  // } 
     
 
   
