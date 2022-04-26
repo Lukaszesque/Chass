@@ -8,30 +8,22 @@
   //   console.log(item.id)
   //   item.style.gridArea = item.id;
   // }
-    
-    //creates white pawns
-    for (let i = 0; i < 8; i++)    
-    {
-      const pawn = document.createElement("img");
-      pawn.src = "Icons/white pawn.svg";
-      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-      document.getElementById(chessboardNum[i] + '2').appendChild(pawn);
-    }
-    
-    //creates black pawns
-    for (let i = 0; i < 8; i++)    
-    {
-      const pawn = document.createElement("img");
-      pawn.src = "Icons/black pawn.svg";
-      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-      document.getElementById(chessboardNum[i] + '7').appendChild(pawn);
-    }
-
-    //rooks
+  
     function createPiece(piece, url, chessboardSquare) {
       piece = document.createElement("img");
       piece.src = url;
       document.getElementById(chessboardSquare).appendChild(piece);
+    }
+    for (let i = 0; i < 8; i++)    
+    {
+      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+      createPiece('black pawn', "Icons/black pawn.svg", chessboardNum[i] + "7")
+    }
+
+    for (let i = 0; i < 8; i++)    
+    {
+      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+      createPiece('white pawn', "Icons/white pawn.svg", chessboardNum[i] + "2")
     }
 
     createPiece('rook', 'Icons/white rook.svg', 'a1');
