@@ -8,44 +8,46 @@
   //   console.log(item.id)
   //   item.style.gridArea = item.id;
   // }
-  
-    function createPiece(piece, url, chessboardSquare) {
-      piece = document.createElement("img");
-      piece.src = url;
-      document.getElementById(chessboardSquare).appendChild(piece);
-    }
-    for (let i = 0; i < 8; i++)    
-    {
-      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-      createPiece('black pawn', "Icons/black pawn.svg", chessboardNum[i] + "7")
+
+    function createPiece(url, chessboardSquare, pieceId) {
+      let pieceName = document.createElement("img");
+      pieceName.src = url;
+      let element = document.getElementById(chessboardSquare).appendChild(pieceName);
+      element.setAttribute("id", pieceId);
     }
 
     for (let i = 0; i < 8; i++)    
     {
       let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-      createPiece('white pawn', "Icons/white pawn.svg", chessboardNum[i] + "2")
+      createPiece("Icons/black pawn.svg", chessboardNum[i] + "7", "blackPawn")
     }
 
-    createPiece('rook', 'Icons/white rook.svg', 'a1');
-    createPiece('rook', 'Icons/white rook.svg', 'h1');
-    createPiece('rook', 'Icons/black rook.svg', 'a8');
-    createPiece('rook', 'Icons/black rook.svg', 'h8');
+    for (let i = 0; i < 8; i++)    
+    {
+      let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+      createPiece("Icons/white pawn.svg", chessboardNum[i] + "2", "whitePawn")
+    }
+
+    createPiece('Icons/white rook.svg', 'a1', "whiteRook");
+    createPiece('Icons/white rook.svg', 'h1', "whiteRook");
+    createPiece('Icons/black rook.svg', 'a8', "blackRook");
+    createPiece('Icons/black rook.svg', 'h8', "blackRook");
     
-    createPiece('bishop', 'Icons/white bishop.svg', 'c1');   
-    createPiece('bishop', 'Icons/white bishop.svg', 'f1');   
-    createPiece('bishop', 'Icons/black bishop.svg', 'c8');   
-    createPiece('bishop', 'Icons/black bishop.svg', 'f8');   
+    createPiece('Icons/white bishop.svg', 'c1', "whiteBishop");   
+    createPiece('Icons/white bishop.svg', 'f1', "whiteBishop");   
+    createPiece('Icons/black bishop.svg', 'c8', "blackBishop");   
+    createPiece('Icons/black bishop.svg', 'f8', "blackBishop");   
 
-    createPiece('knight', 'Icons/white knight.svg', 'b1');   
-    createPiece('knight', 'Icons/white knight.svg', 'g1');   
-    createPiece('knight', 'Icons/black knight.svg', 'b8');   
-    createPiece('knight', 'Icons/black knight.svg', 'g8');   
+    createPiece('Icons/white knight.svg', 'b1', "whiteKnight");   
+    createPiece('Icons/white knight.svg', 'g1', "whiteKnight");   
+    createPiece('Icons/black knight.svg', 'b8', "blackKnight");   
+    createPiece('Icons/black knight.svg', 'g8', "blackKnight");   
 
-    createPiece('king', 'Icons/white king.svg', 'e1');   
-    createPiece('king', 'Icons/black king.svg', 'e8');  
+    createPiece('Icons/white king.svg', 'e1', "whiteKing");   
+    createPiece('Icons/black king.svg', 'e8', "blackKing");  
 
-    createPiece('queen', 'Icons/white queen.svg', 'd1');   
-    createPiece('queen', 'Icons/black queen.svg', 'd8');  
+    createPiece('Icons/white queen.svg', 'd1', "whiteQueen");   
+    createPiece('Icons/black queen.svg', 'd8', "blackQueen");  
 
     //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces chess pieces link
    
