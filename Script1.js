@@ -57,17 +57,15 @@
 
     //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces chess pieces link
    
-    window.onclick = e => {
-      let elementId = e.target.id;      
-      var items = document.querySelectorAll(".container div");
-      for (var i = 0; i < items.length; i++)
-      {
-        var item = items[i];
-        item.classList.remove('onClick');
-      }
-      document.getElementById(elementId).classList.add('onClick');
-  } 
-
-    
+  function clickChessboard(id) 
+  {
+    var items = document.querySelectorAll(".container div");
+  for (var i = 0; i < items.length; i++)
+  {
+    var item = items[i];
+    item.classList.remove('onClick');
+  }
+  document.getElementById(id).classList.add('onClick');
+  }
 
   
