@@ -47,16 +47,8 @@ createPiece('Icons/black queen.svg', 'd8', "blackQueen");
 
 //https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces chess pieces link
 
-//Logic for storing last two moves in an array
-let clickArray = [];   
-clickArray.push(chessSquareId);
-  if (clickArray.length > 2) 
-  {
-    clickArray.shift();
-  }
-  console.log(clickArray);
 
-  
+let clickArray = [];   
 function clickChessboard(chessSquareId) 
 {
   var items = document.querySelectorAll(".container div");
@@ -66,17 +58,26 @@ function clickChessboard(chessSquareId)
       item.classList.remove('onClick');
     }
   document.getElementById(chessSquareId).classList.add('onClick');
-
-  let pieceTypeId = document.getElementById(chessSquareId).firstElementChild.id;
-
-  //ToDo: Work on logic to decide what happens to pawn after it moves
-  if (pieceTypeId === "whitePawn") {
-    //console.log("hi");
-    } 
- 
   
+  //This logic tells you the piece ID
+  let pieceTypeId;
+  let pieceTypeElement = document.getElementById(chessSquareId).firstElementChild;
+  if (pieceTypeElement != null) {pieceTypeId = pieceTypeElement.id} 
+  console.log(pieceTypeId);
+  
+  //Logic for storing last two moves in an array 
+  clickArray.push(chessSquareId);
+  if (clickArray.length > 2) 
+  {
+    clickArray.shift();  
+  }
+  console.log(clickArray);
 
-  return document.getElementById(chessSquareId);
+  //TODO: If a square is clicked and another square is clicked, the pawn div gets appended to the other square
+  if (pieceTypeId === "whitePawn") {
+    console.log("hi");
+    
+    } 
 }
 
   
