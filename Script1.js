@@ -128,17 +128,17 @@ function clickChessboard(chessSquareId) {
     document.getElementById(chessSquareId).classList.add('onClick');
   }
 
-  //TODO: If a square is clicked and another square is clicked, the pawn div gets appended to the other square
+  //If a square is clicked and another square is clicked, the piece div gets appended to the other square
   let pieceSelected = false;
   if (pieceTypeId !== undefined) {
     pieceSelected = true;
   }
 
   if (clickArray.length > 1) {
-    let eleChild = document.getElementById(clickArray[0]).firstChild.id;
-    console.log(AccessPieceSource(eleChild));
-    createPiece(AccessPieceSource(eleChild), clickArray[1], "whitePawn");
-    ele.removeChild(eleChild);
+    let ele = document.getElementById(clickArray[0]);
+    console.log(AccessPieceSource(ele.firstChild.id));
+    createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id);
+    ele.removeChild(ele.firstChild);
     clickArray = [];
   }
 }
