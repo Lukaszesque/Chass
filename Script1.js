@@ -15,28 +15,68 @@ function createPiece(url, chessboardSquare, pieceId) {
 }
 
 var pieceIdUrlDictionary = {
-  "blackPawn" : "Icons/black pawn.svg",
-  "whitePawn" : "Icons/white pawn.svg",
-  "whiteRook": 'Icons/white rook.svg',
-  "blackRook": 'Icons/black rook.svg',
-  "whiteBishop":'Icons/white bishop.svg', 
-  "blackBishop":'Icons/black bishop.svg', 
-  "whiteKnight":'Icons/white knight.svg', 
-  "blackKnight":'Icons/black knight.svg', 
-  "whiteKing": 'Icons/white king.svg',
-  "blackKing": 'Icons/black king.svg',
-  "whiteQueen":'Icons/white queen.svg', 
-  "blackQueen":'Icons/black queen.svg'
+  blackPawn: "Icons/black pawn.svg",
+  whitePawn: "Icons/white pawn.svg",
+  whiteRook: 'Icons/white rook.svg',
+  blackRook: 'Icons/black rook.svg',
+  whiteBishop: 'Icons/white bishop.svg',
+  blackBishop: 'Icons/black bishop.svg',
+  whiteKnight: 'Icons/white knight.svg',
+  blackKnight: 'Icons/black knight.svg',
+  whiteKing: 'Icons/white king.svg',
+  blackKing: 'Icons/black king.svg',
+  whiteQueen: 'Icons/white queen.svg',
+  blackQueen: 'Icons/black queen.svg'
+}
+
+function AccessPieceSource(pieceId) {
+  if (pieceId == "whitePawn") {
+    return pieceIdUrlDictionary.whitePawn
+  }
+  if (pieceId == "blackPawn") {
+    return pieceIdUrlDictionary.blackPawn
+  }
+  if (pieceId == "whiteBishop") {
+    return pieceIdUrlDictionary.whiteBishop
+  }
+  if (pieceId == "blackBishop") {
+    return pieceIdUrlDictionary.blackBishop
+  }
+  if (pieceId == "whiteKnight") {
+    return pieceIdUrlDictionary.whiteKnight
+  }
+  if (pieceId == "blackKnight") {
+    return pieceIdUrlDictionary.blackKnight
+  }
+  if (pieceId == "whiteRook") {
+    return pieceIdUrlDictionary.whiteRook
+  }
+  if (pieceId == "blackRook") {
+    return pieceIdUrlDictionary.blackRook
+  }
+  if (pieceId == "whiteKing") {
+    return pieceIdUrlDictionary.whiteKing
+  }
+  if (pieceId == "blackKing") {
+    return pieceIdUrlDictionary.blackKing
+  }
+  if (pieceId == "whiteQueen") {
+    return pieceIdUrlDictionary.whiteQueen
+  }
+  if (pieceId == "blackQueen") {
+    return pieceIdUrlDictionary.blackQueen
+  }
+}
+
+
+for (let i = 0; i < 8; i++) {
+  let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  createPiece(pieceIdUrlDictionary.blackPawn, chessboardNum[i] + "7", "blackPawn")
 }
 
 for (let i = 0; i < 8; i++) {
   let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  createPiece("Icons/black pawn.svg", chessboardNum[i] + "7", "blackPawn")
-}
-
-for (let i = 0; i < 8; i++) {
-  let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  createPiece("Icons/white pawn.svg", chessboardNum[i] + "2", "whitePawn")
+  createPiece(pieceIdUrlDictionary.whitePawn, chessboardNum[i] + "2", "whitePawn")
 }
 
 createPiece('Icons/white rook.svg', 'a1', "whiteRook");
@@ -95,12 +135,10 @@ function clickChessboard(chessSquareId) {
   }
 
   if (clickArray.length > 1) {
-    let ele = document.getElementById(clickArray[0]);   
-    let eleChild = document.getElementById(clickArray[0]).firstChild;
-    console.log(ele, eleChild);
+    let eleChild = document.getElementById(clickArray[0]).firstChild.id;
+    console.log(AccessPieceSource(eleChild));
+    createPiece(AccessPieceSource(eleChild), clickArray[1], "whitePawn");
     ele.removeChild(eleChild);
-    createPiece('Icons/white pawn.svg', clickArray[1], "whitePawn");
     clickArray = [];
   }
-
 }
