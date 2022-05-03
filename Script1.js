@@ -1,12 +1,3 @@
-// var items = document.querySelectorAll(".container div");
-// //console.log(items);
-// for (var i = 0; i < items.length; i++)
-// {
-//   var item = items[i];
-//   console.log(item.id)
-//   item.style.gridArea = item.id;
-// }
-
 function createPiece(url, chessboardSquare, pieceId, pieceClass) {
   let pieceName = document.createElement("img");
   pieceName.src = url;
@@ -128,6 +119,10 @@ function clickChessboard(chessSquareId) {
     document.getElementById(chessSquareId).classList.add('onClick');
   }
 
+  //TODO: Turns:
+  let turn = 0;
+  //white turn is turn % 2 = 0;, black is turn % 2 = 1;
+
   //If a square is clicked and another square is clicked, the piece div gets appended to the other square
   let pieceSelected = false;
   if (pieceTypeId !== undefined) {
@@ -140,5 +135,9 @@ function clickChessboard(chessSquareId) {
     createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
     ele.removeChild(ele.firstChild);
     clickArray = [];
+    turn++
   }
+
+
+
 }
