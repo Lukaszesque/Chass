@@ -92,6 +92,7 @@ createPiece('Icons/black queen.svg', 'd8', "blackQueen", "black");
 
 
 let clickArray = [];
+let turn = 1;
 
 function clickChessboard(chessSquareId) {
   //This logic tells you the piece ID
@@ -119,24 +120,32 @@ function clickChessboard(chessSquareId) {
     document.getElementById(chessSquareId).classList.add('onClick');
   }
 
-  //TODO: Turns:
-  let turn = 0;
-  //white turn is turn % 2 = 0;, black is turn % 2 = 1;
 
+  //Turns Logic:
   //If a square is clicked and another square is clicked, the piece div gets appended to the other square
-  let pieceSelected = false;
-  if (pieceTypeId !== undefined) {
-    pieceSelected = true;
-  }
+   if (turn % 2 === 1 && document.getElementById(clickArray[0]).firstChild.className === "white") {
+    if (clickArray.length > 1) {
+      let ele = document.getElementById(clickArray[0]);
+      console.log(ele.firstChild.classList);
+      createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
+      ele.removeChild(ele.firstChild);
+      clickArray = [];
+      turn++
+    }
+   }
 
-  if (clickArray.length > 1) {
-    let ele = document.getElementById(clickArray[0]);
-    console.log(ele.firstChild.classList);
-    createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
-    ele.removeChild(ele.firstChild);
-    clickArray = [];
-    turn++
-  }
+   if (turn % 2 === 0 && document.getElementById(clickArray[0]).firstChild.className === "black") {
+    if (clickArray.length > 1) {
+      let ele = document.getElementById(clickArray[0]);
+      console.log(ele.firstChild.classList);
+      createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
+      ele.removeChild(ele.firstChild);
+      clickArray = [];
+      turn++
+    }
+   }
+   console.log("its turn " + turn);
+
 
 
 
