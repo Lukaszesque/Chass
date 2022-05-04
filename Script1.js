@@ -63,7 +63,7 @@ function AccessPieceSource(pieceId) {
 
 for (let i = 0; i < 8; i++) {
   let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  createPiece(pieceIdUrlDictionary.blackPawn, chessboardNum[i] + "7", "blackPawn", "black") 
+  createPiece(pieceIdUrlDictionary.blackPawn, chessboardNum[i] + "7", "blackPawn", "black")
 }
 
 for (let i = 0; i < 8; i++) {
@@ -71,10 +71,10 @@ for (let i = 0; i < 8; i++) {
   createPiece(pieceIdUrlDictionary.whitePawn, chessboardNum[i] + "2", "whitePawn", "white")
 }
 
-createPiece('Icons/white rook.svg', 'a1', "whiteRook","white");
-createPiece('Icons/white rook.svg', 'h1', "whiteRook","white");
-createPiece('Icons/black rook.svg', 'a8', "blackRook","black");
-createPiece('Icons/black rook.svg', 'h8', "blackRook","black");
+createPiece('Icons/white rook.svg', 'a1', "whiteRook", "white");
+createPiece('Icons/white rook.svg', 'h1', "whiteRook", "white");
+createPiece('Icons/black rook.svg', 'a8', "blackRook", "black");
+createPiece('Icons/black rook.svg', 'h8', "blackRook", "black");
 createPiece('Icons/white bishop.svg', 'c1', "whiteBishop", "white");
 createPiece('Icons/white bishop.svg', 'f1', "whiteBishop", "white");
 createPiece('Icons/black bishop.svg', 'c8', "blackBishop", "black");
@@ -101,14 +101,14 @@ function clickChessboard(chessSquareId) {
   if (pieceTypeElement != null) {
     pieceTypeId = pieceTypeElement.id
   }
-  console.log(pieceTypeId);
+  //console.log("the selected piece Id is " + pieceTypeId);
 
   //Logic for storing last two moves in an array 
   clickArray.push(chessSquareId);
   if (clickArray.length > 2) {
     clickArray.shift();
   }
-  console.log(clickArray);
+  //console.log("click array value(s) are " + clickArray);
 
   //logic for the highlight
   var items = document.querySelectorAll(".container div");
@@ -120,33 +120,46 @@ function clickChessboard(chessSquareId) {
     document.getElementById(chessSquareId).classList.add('onClick');
   }
 
-
-  //Turns Logic:
   //If a square is clicked and another square is clicked, the piece div gets appended to the other square
-   if (turn % 2 === 1 && document.getElementById(clickArray[0]).firstChild.className === "white") {
+  function MoveLogic(clickArray0, clickArray1) {
+    let ele = document.getElementById(clickArray0);
+    createPiece(AccessPieceSource(ele.firstChild.id), clickArray1, ele.firstChild.id, ele.firstChild.classList[0]);
+    ele.removeChild(ele.firstChild);
+    clickArray = [];
+    turn++
+  }
+
+  //Turns Logic (notice the piece validation):
+  if (turn % 2 === 1 && clickArray.length > 1 && document.getElementById(clickArray[0]).firstChild.className === "white") {
     if (clickArray.length > 1) {
-      let ele = document.getElementById(clickArray[0]);
-      console.log(ele.firstChild.classList);
-      createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
-      ele.removeChild(ele.firstChild);
-      clickArray = [];
-      turn++
+      if (pieceValidation(document.getElementById(clickArray[0]).firstChild.id, clickArray[0], clickArray[1]) == true) {
+        MoveLogic(clickArray[0], clickArray[1]);
+      }
+      //console.log(document.getElementById(clickArray[0]).firstChild.id, clickArray[0][1], clickArray[1][1]);     
     }
-   }
+  }
 
-   if (turn % 2 === 0 && document.getElementById(clickArray[0]).firstChild.className === "black") {
+  if (turn % 2 === 0 && clickArray.length > 1 && document.getElementById(clickArray[0]).firstChild.className === "black") {
     if (clickArray.length > 1) {
-      let ele = document.getElementById(clickArray[0]);
-      console.log(ele.firstChild.classList);
-      createPiece(AccessPieceSource(ele.firstChild.id), clickArray[1], ele.firstChild.id, ele.firstChild.classList[0]);
-      ele.removeChild(ele.firstChild);
-      clickArray = [];
-      turn++
+      if (pieceValidation(document.getElementById(clickArray[0]).firstChild.id, clickArray[0], clickArray[1]) == true) {
+        MoveLogic(clickArray[0], clickArray[1]);
+      }
     }
-   }
-   console.log("its turn " + turn);
+  }
+  //console.log("its turn " + turn);
 
+}
 
-
-
+//TODO: Work on the piece validation
+function pieceValidation(pieceId, orginSquare, targetSquare) {
+  let orginSquareNumber = parseInt(orginSquare[1], 10);
+  let targetSquareNumber = parseInt(targetSquare[1], 10);
+  if (pieceId === "whitePawn") {
+    if (targetSquareNumber === (orginSquareNumber + 1)) {
+      console.log("validated true")
+      return true
+    } else {
+      return false
+    }
+  }
 }
