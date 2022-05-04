@@ -150,16 +150,26 @@ function clickChessboard(chessSquareId) {
 
 }
 
-//TODO: Work on the piece validation
+//TODO: Work on the piece validation (finish pawns)
 function pieceValidation(pieceId, orginSquare, targetSquare) {
   let orginSquareNumber = parseInt(orginSquare[1], 10);
   let targetSquareNumber = parseInt(targetSquare[1], 10);
   if (pieceId === "whitePawn") {
     if (targetSquareNumber === (orginSquareNumber + 1)) {
-      console.log("validated true")
+      //console.log("validated true")
       return true
     } else {
       return false
     }
   }
+
+  if (pieceId === "blackPawn") {
+    if (targetSquareNumber === (orginSquareNumber - 1)) {
+      //console.log("validated true")
+      return true
+    } else {
+      return false
+    }
+  }
+
 }
