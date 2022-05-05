@@ -1,3 +1,6 @@
+const chessboardLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+const chessboardNumbers = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
 function createPiece(url, chessboardSquare, pieceId, pieceClass) {
   let pieceName = document.createElement("img");
   pieceName.src = url;
@@ -62,12 +65,12 @@ function AccessPieceSource(pieceId) {
 
 
 for (let i = 0; i < 8; i++) {
-  let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  let chessboardNum = chessboardLetters;
   createPiece(pieceIdUrlDictionary.blackPawn, chessboardNum[i] + "7", "blackPawn", "black")
 }
 
 for (let i = 0; i < 8; i++) {
-  let chessboardNum = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  let chessboardNum = chessboardLetters;
   createPiece(pieceIdUrlDictionary.whitePawn, chessboardNum[i] + "2", "whitePawn", "white")
 }
 
@@ -152,11 +155,18 @@ function clickChessboard(chessSquareId) {
 
 //TODO: Work on the piece validation (finish pawns)
 function pieceValidation(pieceId, orginSquare, targetSquare) {
+  let orginSquareLetter = orginSquare[0];
   let orginSquareNumber = parseInt(orginSquare[1], 10);
+  let targetSquareLetter = targetSquare[0]
   let targetSquareNumber = parseInt(targetSquare[1], 10);
+
+  //pawns
   if (pieceId === "whitePawn") {
     if (targetSquareNumber === (orginSquareNumber + 1)) {
       //console.log("validated true")
+      return true
+    }
+    if (targetSquareNumber === 4 && orginSquareNumber === 2) {
       return true
     } else {
       return false
@@ -167,9 +177,27 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     if (targetSquareNumber === (orginSquareNumber - 1)) {
       //console.log("validated true")
       return true
+    }
+    if (targetSquareNumber === 5 && orginSquareNumber === 7) {
+      return true
     } else {
       return false
     }
   }
+
+  //rooks
+  if (pieceId === "whiteRook" || pieceId == "blackRook") {
+    if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  if (pieceId === "whiteBishop") {
+    
+  }
+ 
 
 }
