@@ -162,11 +162,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
 
   //pawns
   if (pieceId === "whitePawn") {
-    if (targetSquareNumber === (orginSquareNumber + 1)) {
+    if (targetSquareNumber === (orginSquareNumber + 1) && orginSquareLetter === targetSquareLetter) {
       //console.log("validated true")
       return true
     }
-    if (targetSquareNumber === 4 && orginSquareNumber === 2) {
+    if (targetSquareNumber === 4 && orginSquareNumber === 2 && orginSquareLetter === targetSquareLetter) {
       return true
     } else {
       return false
@@ -174,11 +174,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   }
 
   if (pieceId === "blackPawn") {
-    if (targetSquareNumber === (orginSquareNumber - 1)) {
+    if (targetSquareNumber === (orginSquareNumber - 1) && orginSquareLetter === targetSquareLetter) {
       //console.log("validated true")
       return true
     }
-    if (targetSquareNumber === 5 && orginSquareNumber === 7) {
+    if (targetSquareNumber === 5 && orginSquareNumber === 7 && orginSquareLetter === targetSquareLetter) {
       return true
     } else {
       return false
