@@ -195,6 +195,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
   }
 
+  //bishops
   if (pieceId === "whiteBishop" || "blackBishop") {
     let diff = targetSquareNumber - orginSquareNumber;
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
