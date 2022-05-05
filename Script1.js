@@ -195,8 +195,13 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
   }
 
-  if (pieceId === "whiteBishop") {
-    
+  if (pieceId === "whiteBishop" || "blackBishop") {
+    let diff = targetSquareNumber - orginSquareNumber;
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      return true
+    }
+    else {return false}
   }
  
 
