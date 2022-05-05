@@ -153,7 +153,7 @@ function clickChessboard(chessSquareId) {
 
 }
 
-//TODO: Work on the piece validation (finish pawns)
+//Movement Validation
 function pieceValidation(pieceId, orginSquare, targetSquare) {
   let orginSquareLetter = orginSquare[0];
   let orginSquareNumber = parseInt(orginSquare[1], 10);
@@ -196,7 +196,8 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   }
 
   //bishops
-  if (pieceId === "whiteBishop" || "blackBishop") {
+  if (pieceId === "whiteBishop" || pieceId == "blackBishop") {
+    console.log(pieceId);
     let diff = targetSquareNumber - orginSquareNumber;
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
     if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
@@ -204,6 +205,21 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
     else {return false}
   }
- 
+  
+  //knights
+  if (pieceId === "whiteKnight" || pieceId === "blackKnight") {
+    console.log("hi");
+  let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+  if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {return true}
+  if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {return true}
+  if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {return true}
+  if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {return true}
+  if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {return true}
+  if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {return true}
+  if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {return true}
+  if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {return true}
+  else {return false}
+   }
+  
 
 }
