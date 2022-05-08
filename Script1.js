@@ -152,7 +152,6 @@ function clickChessboard(chessSquareId) {
       }
     }
   }
-  //console.log("its turn " + turn);
 }
 
 //Movement Validation
@@ -177,7 +176,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
         }
         if (targetSquareNumber === (orginSquareNumber + 1) && targetSquareLetter === chessboardLetters[indexOfOrginLetter - 1]) {
           return true
-        }   
+        }
       }
     }
     //Moving 1 square
@@ -187,14 +186,29 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     //Moving 2 squares at the start
     if (targetSquareNumber === 4 && orginSquareNumber === 2 && orginSquareLetter === targetSquareLetter) {
       return true
-    }
-   else {
+    } else {
       return false
     }
   }
 
-    //TODO: Implement diagonal movement for black
+  //Black pawns
   if (pieceId === "blackPawn") {
+    let indexOfOrginLetter = chessboardLetters.indexOf(orginSquareLetter);
+    //Taking diagonally
+    if (document.getElementById(targetSquare).firstChild !== null) {
+      if (document.getElementById(targetSquare).firstChild.className === "white") {
+        if (targetSquareNumber === (orginSquareNumber - 1) && targetSquareLetter == orginSquareLetter) {
+          console.log("hi");
+          return false
+        }
+        if (targetSquareNumber === (orginSquareNumber - 1) && targetSquareLetter === chessboardLetters[indexOfOrginLetter + 1]) {
+          return true
+        }
+        if (targetSquareNumber === (orginSquareNumber - 1) && targetSquareLetter === chessboardLetters[indexOfOrginLetter - 1]) {
+          return true
+        }
+      }
+    }
     if (targetSquareNumber === (orginSquareNumber - 1) && orginSquareLetter === targetSquareLetter) {
       //console.log("validated true")
       return true
@@ -207,7 +221,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   }
 
   //rooks
-  if (pieceId === "whiteRook" || pieceId == "blackRook") {
+  if (pieceId === "whiteRook" || pieceId === "blackRook") {
     if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
       return true
     } else {
@@ -217,9 +231,29 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
 
   //bishops
   if (pieceId === "whiteBishop" || pieceId == "blackBishop") {
-    let diff = targetSquareNumber - orginSquareNumber;
+    let diff = Math.abs(targetSquareNumber - orginSquareNumber);
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+
+
+
+    //Logic for not moving through pieces
+    let storedSquares = [];
     if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      for (let i = 0; i < diff; i++) {
+        storedSquares.push(chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i));
+        storedSquares.push(chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i));
+        storedSquares.push(chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i));
+        storedSquares.push(chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i))
+      }
+      console.log(storedSquares);
+      for (let i = 0; i < storedSquares.length; i++) {
+        if (document.getElementById(storedSquares[i]).firstChild !== null){
+          if (document.getElementById(storedSquares[i].firstChild.id === "white")){
+            return false
+          }
+        }
+      }
+
       return true
     } else {
       return false
@@ -314,3 +348,5 @@ function takingPiece(targetSquare, pieceTargetColour) {
     }
   }
 }
+
+function pieceBlockChecker() {};
