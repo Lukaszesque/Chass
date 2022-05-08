@@ -189,37 +189,79 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   if (pieceId === "whiteRook" || pieceId == "blackRook") {
     if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
       return true
-    }
-    else {
+    } else {
       return false
     }
   }
 
   //bishops
   if (pieceId === "whiteBishop" || pieceId == "blackBishop") {
-    console.log(pieceId);
+    let diff = targetSquareNumber - orginSquareNumber;
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  //knights
+  if (pieceId === "whiteKnight" || pieceId === "blackKnight") {
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {
+      return true
+    }
+    if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  //queens
+  if (pieceId === "whiteQueen" || pieceId === "blackQueen") {
     let diff = targetSquareNumber - orginSquareNumber;
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
     if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
       return true
     }
+    if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  //kings
+  if (pieceId === "whiteKing" || pieceId === "blackKing") {
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber + 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber + 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber - 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber - 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber + 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber - 1) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber) {return true}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter +- 1] && targetSquareNumber === orginSquareNumber) {return true}
     else {return false}
   }
-  
-  //knights
-  if (pieceId === "whiteKnight" || pieceId === "blackKnight") {
-    console.log("hi");
-  let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
-  if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {return true}
-  if (targetSquareNumber === orginSquareNumber + 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {return true}
-  if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter + 1]) {return true}
-  if (targetSquareNumber === orginSquareNumber - 2 && targetSquareLetter === chessboardLetters[indexOfLetter - 1]) {return true}
-  if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {return true}
-  if (targetSquareNumber === orginSquareNumber + 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {return true}
-  if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter + 2]) {return true}
-  if (targetSquareNumber === orginSquareNumber - 1 && targetSquareLetter === chessboardLetters[indexOfLetter - 2]) {return true}
-  else {return false}
-   }
-  
 
 }
