@@ -164,12 +164,31 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
 
   //pawns
   if (pieceId === "whitePawn") {
+    let indexOfOrginLetter = chessboardLetters.indexOf(orginSquareLetter);
+    //Moving 1 square
     if (targetSquareNumber === (orginSquareNumber + 1) && orginSquareLetter === targetSquareLetter) {
-      //console.log("validated true")
       return true
     }
+    //Moving 2 squares at the start
     if (targetSquareNumber === 4 && orginSquareNumber === 2 && orginSquareLetter === targetSquareLetter) {
       return true
+    }
+
+    //Taking diagonally
+    if (document.getElementById(targetSquare).firstChild !== null) {
+      if (document.getElementById(targetSquare).firstChild.className === "black") {
+        //TODO: Figure out why preventing to take forward does not work
+        // if (targetSquareNumber === (orginSquareNumber + 1) && targetSquareLetter == orginSquareLetter) {
+        //   console.log("hi");
+        //   return false
+        // }
+        if (targetSquareNumber === (orginSquareNumber + 1) && targetSquareLetter === chessboardLetters[indexOfOrginLetter + 1]) {
+          return true
+        }
+        if (targetSquareNumber === (orginSquareNumber + 1) && targetSquareLetter === chessboardLetters[indexOfOrginLetter - 1]) {
+          return true
+        }   
+      }
     } else {
       return false
     }
@@ -290,6 +309,8 @@ function takingPiece(targetSquare, pieceTargetColour) {
   if (targetElement.firstChild !== null) {
     if (targetElement.firstChild.className === pieceTargetColour) {
       targetElement.removeChild(targetElement.firstChild);
+    } else {
+      clickArray = []
     }
   }
 }
