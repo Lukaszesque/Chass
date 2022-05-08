@@ -132,25 +132,27 @@ function clickChessboard(chessSquareId) {
     turn++
   }
 
-  //Turns Logic (notice the piece validation):
+  //White Turn Logic (notice the piece validation):
   if (turn % 2 === 1 && clickArray.length > 1 && document.getElementById(clickArray[0]).firstChild.className === "white") {
     if (clickArray.length > 1) {
       if (pieceValidation(document.getElementById(clickArray[0]).firstChild.id, clickArray[0], clickArray[1]) == true) {
+        takingPiece(clickArray[1], "black");
         MoveLogic(clickArray[0], clickArray[1]);
       }
       //console.log(document.getElementById(clickArray[0]).firstChild.id, clickArray[0][1], clickArray[1][1]);     
     }
   }
 
+  //Black Turn:
   if (turn % 2 === 0 && clickArray.length > 1 && document.getElementById(clickArray[0]).firstChild.className === "black") {
     if (clickArray.length > 1) {
       if (pieceValidation(document.getElementById(clickArray[0]).firstChild.id, clickArray[0], clickArray[1]) == true) {
+        takingPiece(clickArray[1], "white");
         MoveLogic(clickArray[0], clickArray[1]);
       }
     }
   }
   //console.log("its turn " + turn);
-
 }
 
 //Movement Validation
@@ -253,15 +255,41 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   //kings
   if (pieceId === "whiteKing" || pieceId === "blackKing") {
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
-    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber + 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber + 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber - 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber - 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber + 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber - 1) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber) {return true}
-    if (targetSquareLetter === chessboardLetters[indexOfLetter +- 1] && targetSquareNumber === orginSquareNumber) {return true}
-    else {return false}
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber + 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber + 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber - 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - 1] && targetSquareNumber === orginSquareNumber - 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber + 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter] && targetSquareNumber === orginSquareNumber - 1) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + 1] && targetSquareNumber === orginSquareNumber) {
+      return true
+    }
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + -1] && targetSquareNumber === orginSquareNumber) {
+      return true
+    } else {
+      return false
+    }
   }
 
+}
+
+function takingPiece(targetSquare, pieceTargetColour) {
+  let targetElement = document.getElementById(targetSquare);
+  if (targetElement.firstChild !== null) {
+    if (targetElement.firstChild.className === pieceTargetColour) {
+      targetElement.removeChild(targetElement.firstChild);
+    }
+  }
 }
