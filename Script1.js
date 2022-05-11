@@ -237,24 +237,23 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
 
 
     //Logic for not moving through pieces
-    let storedSquares = [];
     if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-      for (let i = 0; i < diff; i++) {
-        storedSquares.push(chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i));
-        storedSquares.push(chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i));
-        storedSquares.push(chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i));
-        storedSquares.push(chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i))
-      }
-      console.log(storedSquares);
-      for (let i = 0; i < storedSquares.length; i++) {
-        if (document.getElementById(storedSquares[i]).firstChild !== null){
-          if (document.getElementById(storedSquares[i].firstChild.id === "white")){
-            return false
-          }
+    if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
+      for (let i = 1; i < diff + 1; i++) {
+        let screenedElementId = chessboardLetters[indexOfLetter + i]  + (orginSquareNumber + i);
+        //console.log(screenedElementId);
+        if (document.getElementById(screenedElementId).firstChild !== null) {
+          if (document.getElementById(screenedElementId).firstChild.className === "white") {
+            return false;
+          };
         }
+        else {return true};
       }
 
-      return true
+    }
+    
+    
+
     } else {
       return false
     }
