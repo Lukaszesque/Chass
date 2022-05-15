@@ -223,10 +223,47 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   //rooks
   if (pieceId === "whiteRook" || pieceId === "blackRook") {
     if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
+      if (RookBlockLogic("white", "black", orginSquare, targetSquare) === "not blocked") {
       return true
+      }
+      
     } else {
       return false
     }
+  }
+
+  function RookBlockLogic(pieceColour, enemyPieceColour, orginSquare, targetSquare) {
+    //Getting the squares difference
+    let screened = false;
+  let diff = 0;
+  let screenedSquareId = "";
+  if (targetSquare[0] === orginSquare[0]) {
+    diff = Math.abs(targetSquare[1] - orginSquare[1]);
+  }
+  if (targetSquare[1] === orginSquare[1]) {
+    diff = Math.abs(chessboardLetters.indexOf(targetSquare[0]) - chessboardLetters.indexOf(orginSquare[0]))
+  }
+  
+  //TODO: Finish the sideways motion 
+
+  //Up
+  //Cycle through squares to check for a piece
+  for (let i = 1; i < diff; i++) {
+    if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild !== null) {
+      if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === pieceColour) {
+        screened = true
+      }
+      if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === enemyPieceColour) {
+        if ((orginSquare[0] + (parseInt(orginSquare[1]) + i)) === targetSquare) {
+          screened = false
+        }
+        else {screened = true}
+      }
+    }
+  }
+
+  if (screened === true) {return "blocked"}
+  else {return "not blocked"};
   }
 
   //bishops
@@ -251,7 +288,6 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
       }
     }
 
-    //TODO: Bug - can move through enemy pieces
     function BishopBlockLogic(pieceColour, enemyPieceColour) {
 
       //Up/right motion
@@ -265,8 +301,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
                 screened = true;
               }
               if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {screened = false}
-                else {screened = true;}
+                if (screenedElementId === targetSquare) {
+                  screened = false
+                } else {
+                  screened = true;
+                }
               };
             }
             if (screened === true) {
@@ -291,8 +330,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
                 screened = true;
               }
               if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {screened = false}
-                else {screened = true;}
+                if (screenedElementId === targetSquare) {
+                  screened = false
+                } else {
+                  screened = true;
+                }
               };
             }
             if (screened === true) {
@@ -317,8 +359,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
                 screened = true;
               }
               if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {screened = false}
-                else {screened = true;}
+                if (screenedElementId === targetSquare) {
+                  screened = false
+                } else {
+                  screened = true;
+                }
               };
             }
             if (screened === true) {
@@ -342,8 +387,11 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
                 screened = true;
               }
               if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {screened = false}
-                else {screened = true;}
+                if (screenedElementId === targetSquare) {
+                  screened = false
+                } else {
+                  screened = true;
+                }
               };
             }
             if (screened === true) {
