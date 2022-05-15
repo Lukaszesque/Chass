@@ -234,87 +234,111 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     let diff = Math.abs(targetSquareNumber - orginSquareNumber);
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
     let screened = false;
-
-
-
     //Logic for not moving through pieces
-    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
-      if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
-        for (let i = 1; i < diff + 1; i++) {
-          let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i);
-          //console.log(screenedElementId);
-          if (document.getElementById(screenedElementId).firstChild !== null) {
-            if (document.getElementById(screenedElementId).firstChild.className === "white") {
-              return false;
-            };
-          } else {
-            return true
+    if (pieceId === "whiteBishop") {
+      if (BishopBlockLogic("white") === true) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    if (pieceId === "blackBishop") {
+      if (BishopBlockLogic("black") === true) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    //TODO: Bug - can move through enemy pieces
+    function BishopBlockLogic(pieceColour) {
+      if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
+        if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
+          for (let i = 1; i < diff + 1; i++) {
+            let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i);
+            //console.log(screenedElementId);
+            if (document.getElementById(screenedElementId).firstChild !== null) {
+              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+                screened = true;
+              };
+            }
+            if (screened === true) {
+              return false
+            }
+
           };
-        }
-      }
-    }
-
-    if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-      if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
-        for (let i = 1; i < diff + 1; i++) {
-          let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i);
-          //console.log(screenedElementId);
-          if (document.getElementById(screenedElementId).firstChild !== null) {
-            if (document.getElementById(screenedElementId).firstChild.className === "white") {
-              screened = true;
-            };
-          } else {
+          if (screened === false) {
             return true
+          }
+        }
+      }
+
+      if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+        if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
+          for (let i = 1; i < diff + 1; i++) {
+            let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i);
+            //console.log(screenedElementId);
+            if (document.getElementById(screenedElementId).firstChild !== null) {
+              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+                screened = true;
+              };
+            }
+            if (screened === true) {
+              return false
+            }
           };
+          if (screened === false) {
+            return true
+
+          }
         }
+      }
+
+      if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
+        if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
+          for (let i = 1; i < diff + 1; i++) {
+            let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i);
+            console.log(screenedElementId);
+            if (document.getElementById(screenedElementId).firstChild !== null) {
+              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+                screened = true;
+              };
+            }
+            if (screened === true) {
+              return false
+            }
+          }
+          if (screened === false) {
+            return true
+          }
+        }
+      }
+
+      if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+        if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
+          for (let i = 1; i < diff + 1; i++) {
+            let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i);
+            console.log(screenedElementId);
+            if (document.getElementById(screenedElementId).firstChild !== null) {
+              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+                screened = true;
+              };
+            }
+            if (screened === true) {
+              return false
+            }
+          }
+          if (screened === false) {
+            return true
+          }
+        }
+      } else {
+        return false
       }
     }
 
-    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
-      if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
-        for (let i = 1; i < diff + 1; i++) {
-          let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i);
-          console.log(screenedElementId);
-          if (document.getElementById(screenedElementId).firstChild !== null) {
-            if (document.getElementById(screenedElementId).firstChild.className === "white") {
-              screened = true;
-            };
-          }
-          if (screened === true) {
-            return false
-          }
-        }
-        if (screened === false) {
-          return true
-        }
-      }
-    } 
 
-    if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-      if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
-        for (let i = 1; i < diff + 1; i++) {
-          let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i);
-          console.log(screenedElementId);
-          if (document.getElementById(screenedElementId).firstChild !== null) {
-            if (document.getElementById(screenedElementId).firstChild.className === "white") {
-              screened = true;
-            };
-          }
-          if (screened === true) {
-            return false
-          }
-        }
-        if (screened === false) {
-          return true
-        }
-      }
-    } 
-    
-    
-    
-    else {
-      return false
-    }
   }
 
   //knights
