@@ -236,7 +236,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     let screened = false;
     //Logic for not moving through pieces
     if (pieceId === "whiteBishop") {
-      if (BishopBlockLogic("white") === true) {
+      if (BishopBlockLogic("white", "black") === true) {
         return true
       } else {
         return false
@@ -244,7 +244,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
 
     if (pieceId === "blackBishop") {
-      if (BishopBlockLogic("black") === true) {
+      if (BishopBlockLogic("black", "white") === true) {
         return true
       } else {
         return false
@@ -252,7 +252,9 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
 
     //TODO: Bug - can move through enemy pieces
-    function BishopBlockLogic(pieceColour) {
+    function BishopBlockLogic(pieceColour, enemyPieceColour) {
+
+      //Up/right motion
       if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
         if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
           for (let i = 1; i < diff + 1; i++) {
@@ -261,6 +263,10 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
             if (document.getElementById(screenedElementId).firstChild !== null) {
               if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
                 screened = true;
+              }
+              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+                if (screenedElementId === targetSquare) {screened = false}
+                else {screened = true;}
               };
             }
             if (screened === true) {
@@ -274,6 +280,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
         }
       }
 
+      //Up/left motion
       if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
         if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
           for (let i = 1; i < diff + 1; i++) {
@@ -282,6 +289,10 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
             if (document.getElementById(screenedElementId).firstChild !== null) {
               if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
                 screened = true;
+              }
+              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+                if (screenedElementId === targetSquare) {screened = false}
+                else {screened = true;}
               };
             }
             if (screened === true) {
@@ -295,6 +306,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
         }
       }
 
+      //down/right motion
       if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
         if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
           for (let i = 1; i < diff + 1; i++) {
@@ -303,6 +315,10 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
             if (document.getElementById(screenedElementId).firstChild !== null) {
               if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
                 screened = true;
+              }
+              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+                if (screenedElementId === targetSquare) {screened = false}
+                else {screened = true;}
               };
             }
             if (screened === true) {
@@ -315,6 +331,7 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
         }
       }
 
+      //down/left motion
       if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
         if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
           for (let i = 1; i < diff + 1; i++) {
@@ -323,6 +340,10 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
             if (document.getElementById(screenedElementId).firstChild !== null) {
               if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
                 screened = true;
+              }
+              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+                if (screenedElementId === targetSquare) {screened = false}
+                else {screened = true;}
               };
             }
             if (screened === true) {
