@@ -236,7 +236,6 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     //Getting the squares difference
     let screened = false;
   let diff = 0;
-  let screenedSquareId = "";
   if (targetSquare[0] === orginSquare[0]) {
     diff = Math.abs(targetSquare[1] - orginSquare[1]);
   }
