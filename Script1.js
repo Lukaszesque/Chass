@@ -224,9 +224,9 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   if (pieceId === "whiteRook" || pieceId === "blackRook") {
     if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
       if (RookBlockLogic("white", "black", orginSquare, targetSquare) === "not blocked") {
-      return true
+        return true
       }
-      
+
     } else {
       return false
     }
@@ -235,34 +235,79 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
   function RookBlockLogic(pieceColour, enemyPieceColour, orginSquare, targetSquare) {
     //Getting the squares difference
     let screened = false;
-  let diff = 0;
-  if (targetSquare[0] === orginSquare[0]) {
-    diff = Math.abs(targetSquare[1] - orginSquare[1]);
-  }
-  if (targetSquare[1] === orginSquare[1]) {
-    diff = Math.abs(chessboardLetters.indexOf(targetSquare[0]) - chessboardLetters.indexOf(orginSquare[0]))
-  }
-  
-  //TODO: Finish the sideways motion 
+    let diff = 0;
+    if (targetSquare[0] === orginSquare[0]) {
+      diff = Math.abs(targetSquare[1] - orginSquare[1]);
+    }
+    if (targetSquare[1] === orginSquare[1]) {
+      diff = Math.abs(chessboardLetters.indexOf(targetSquare[0]) - chessboardLetters.indexOf(orginSquare[0]))
+    }
 
-  //Up
-  //Cycle through squares to check for a piece
-  for (let i = 1; i < diff; i++) {
-    if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild !== null) {
-      if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === pieceColour) {
-        screened = true
-      }
-      if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === enemyPieceColour) {
-        if ((orginSquare[0] + (parseInt(orginSquare[1]) + i)) === targetSquare) {
-          screened = false
+    //Up
+    //Cycle through squares to check for a piece
+    if (targetSquare[1] > orginSquare[1]) {
+      for (let i = 1; i < diff; i++) {
+        if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild !== null) {
+          if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === pieceColour) {
+            screened = true
+          }
+          //If same colour puece  is in the way, block the movement. If opposite colour is in the way, piece can be taken if it is the target square
+          if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) + i)).firstChild.className === enemyPieceColour) {
+            if ((orginSquare[0] + (parseInt(orginSquare[1]) + i)) === targetSquare) {
+              screened = false
+            } else {
+              screened = true
+            }
+          }
         }
-        else {screened = true}
       }
     }
-  }
+    //Down
+    //Cycle through squares to check for a piece
+    if (targetSquare[1] < orginSquare[1]) {
+      for (let i = 1; i < diff; i++) {
+        if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) - i)).firstChild !== null) {
+          if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) - i)).firstChild.className === pieceColour) {
+            screened = true
+          }
+          //If same colour puece  is in the way, block the movement. If opposite colour is in the way, piece can be taken if it is the target square
+          if (document.getElementById(orginSquare[0] + (parseInt(orginSquare[1]) - i)).firstChild.className === enemyPieceColour) {
+            if ((orginSquare[0] + (parseInt(orginSquare[1]) - i)) === targetSquare) {
+              screened = false
+            } else {
+              screened = true
+            }
+          }
+        }
+      }
+    }
+    //Sides
+    //Cycle through squares to check for a piece
+    if (chessboardLetters.indexOf[targetSquare[0]] > chessboardLetters.indexOf[targetSquare[1]]) {
+      for (let i = 1; i < diff; i++) {
+        if (document.getElementById(chessboardLetters.indexOf[orginSquare[0] + i] + orginSquare[1]).firstChild !== null) {
+          console.log(orginSquare[0] + i);
+          if (document.getElementById(chessboardLetters.indexOf[orginSquare[0] + i] + orginSquare[1]).firstChild.className === pieceColour) {
+            screened = true
+          }
+          //If same colour puece  is in the way, block the movement. If opposite colour is in the way, piece can be taken if it is the target square
+          if (document.getElementById(chessboardLetters.indexOf[orginSquare[0] + i] + orginSquare[1]).firstChild.className === enemyPieceColour) {
+            if ((chessboardLetters.indexOf[orginSquare[0] + i] + targetSquare[1]) === targetSquare) {
+              screened = false
+            } else {
+              screened = true
+            }
+          }
+        }
+      }
+    }
 
-  if (screened === true) {return "blocked"}
-  else {return "not blocked"};
+
+    if (screened === true) {
+      return "blocked"
+    } else {
+      return "not blocked"
+    };
   }
 
   //bishops
