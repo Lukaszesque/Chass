@@ -332,12 +332,10 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
 
   //bishops
   if (pieceId === "whiteBishop" || pieceId == "blackBishop") {
-    let diff = Math.abs(targetSquareNumber - orginSquareNumber);
-    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
-    let screened = false;
+    
     //Logic for not moving through pieces
     if (pieceId === "whiteBishop") {
-      if (BishopBlockLogic("white", "black") === true) {
+      if (BishopBlockLogic("white", "black", orginSquare, targetSquare) === true) {
         return true
       } else {
         return false
@@ -345,133 +343,138 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
 
     if (pieceId === "blackBishop") {
-      if (BishopBlockLogic("black", "white") === true) {
+      if (BishopBlockLogic("black", "white", orginSquare, targetSquare) === true) {
         return true
       } else {
         return false
       }
     }
+  }
+  
+  function BishopBlockLogic(pieceColour, enemyPieceColour, orginSquare, targetSquare) {
+    let orginSquareLetter = orginSquare[0];
+    let orginSquareNumber = parseInt(orginSquare[1]);
+    let targetSquareLetter = targetSquare[0];
+    let targetSquareNumber = parseInt(targetSquare[1]);
+    let diff = Math.abs(targetSquareNumber - orginSquareNumber);
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    let screened = false;
 
-    function BishopBlockLogic(pieceColour, enemyPieceColour) {
-
-      //Up/right motion
-      if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
-        if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
-          for (let i = 1; i < diff + 1; i++) {
-            let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i);
-            //console.log(screenedElementId);
-            if (document.getElementById(screenedElementId).firstChild !== null) {
-              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+    //Up/right motion
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
+      if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
+        for (let i = 1; i < diff + 1; i++) {
+          let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber + i);
+          //console.log(screenedElementId);
+          if (document.getElementById(screenedElementId).firstChild !== null) {
+            if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+              screened = true;
+            }
+            if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+              if (screenedElementId === targetSquare) {
+                screened = false
+              } else {
                 screened = true;
               }
-              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {
-                  screened = false
-                } else {
-                  screened = true;
-                }
-              };
-            }
-            if (screened === true) {
-              return false
-            }
-
-          };
-          if (screened === false) {
-            return true
+            };
           }
+          if (screened === true) {
+            return false
+          }
+
+        };
+        if (screened === false) {
+          return true
         }
-      }
-
-      //Up/left motion
-      if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-        if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
-          for (let i = 1; i < diff + 1; i++) {
-            let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i);
-            //console.log(screenedElementId);
-            if (document.getElementById(screenedElementId).firstChild !== null) {
-              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
-                screened = true;
-              }
-              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {
-                  screened = false
-                } else {
-                  screened = true;
-                }
-              };
-            }
-            if (screened === true) {
-              return false
-            }
-          };
-          if (screened === false) {
-            return true
-
-          }
-        }
-      }
-
-      //down/right motion
-      if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
-        if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
-          for (let i = 1; i < diff + 1; i++) {
-            let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i);
-            console.log(screenedElementId);
-            if (document.getElementById(screenedElementId).firstChild !== null) {
-              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
-                screened = true;
-              }
-              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {
-                  screened = false
-                } else {
-                  screened = true;
-                }
-              };
-            }
-            if (screened === true) {
-              return false
-            }
-          }
-          if (screened === false) {
-            return true
-          }
-        }
-      }
-
-      //down/left motion
-      if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-        if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
-          for (let i = 1; i < diff + 1; i++) {
-            let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i);
-            console.log(screenedElementId);
-            if (document.getElementById(screenedElementId).firstChild !== null) {
-              if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
-                screened = true;
-              }
-              if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
-                if (screenedElementId === targetSquare) {
-                  screened = false
-                } else {
-                  screened = true;
-                }
-              };
-            }
-            if (screened === true) {
-              return false
-            }
-          }
-          if (screened === false) {
-            return true
-          }
-        }
-      } else {
-        return false
       }
     }
 
+    //Up/left motion
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      if (targetSquareNumber === orginSquareNumber + diff && orginSquareNumber + diff < 9) {
+        for (let i = 1; i < diff + 1; i++) {
+          let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber + i);
+          //console.log(screenedElementId);
+          if (document.getElementById(screenedElementId).firstChild !== null) {
+            if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+              screened = true;
+            }
+            if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+              if (screenedElementId === targetSquare) {
+                screened = false
+              } else {
+                screened = true;
+              }
+            };
+          }
+          if (screened === true) {
+            return false
+          }
+        };
+        if (screened === false) {
+          return true
 
+        }
+      }
+    }
+
+    //down/right motion
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff]) {
+      if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
+        for (let i = 1; i < diff + 1; i++) {
+          let screenedElementId = chessboardLetters[indexOfLetter + i] + (orginSquareNumber - i);
+          console.log(screenedElementId);
+          if (document.getElementById(screenedElementId).firstChild !== null) {
+            if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+              screened = true;
+            }
+            if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+              if (screenedElementId === targetSquare) {
+                screened = false
+              } else {
+                screened = true;
+              }
+            };
+          }
+          if (screened === true) {
+            return false
+          }
+        }
+        if (screened === false) {
+          return true
+        }
+      }
+    }
+
+    //down/left motion
+    if (targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      if (targetSquareNumber === orginSquareNumber - diff && orginSquareNumber - diff > 0) {
+        for (let i = 1; i < diff + 1; i++) {
+          let screenedElementId = chessboardLetters[indexOfLetter - i] + (orginSquareNumber - i);
+          console.log(screenedElementId);
+          if (document.getElementById(screenedElementId).firstChild !== null) {
+            if (document.getElementById(screenedElementId).firstChild.className === pieceColour) {
+              screened = true;
+            }
+            if (document.getElementById(screenedElementId).firstChild.className === enemyPieceColour) {
+              if (screenedElementId === targetSquare) {
+                screened = false
+              } else {
+                screened = true;
+              }
+            };
+          }
+          if (screened === true) {
+            return false
+          }
+        }
+        if (screened === false) {
+          return true
+        }
+      }
+    } else {
+      return false
+    }
   }
 
   //knights
@@ -505,15 +508,40 @@ function pieceValidation(pieceId, orginSquare, targetSquare) {
     }
   }
 
-  //queens
-  if (pieceId === "whiteQueen" || pieceId === "blackQueen") {
+  //queens - TODO: Debug this
+  if (pieceId === "whiteQueen") {
     let diff = targetSquareNumber - orginSquareNumber;
     let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
     if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
-      return true
+      if (BishopBlockLogic("white", "black", orginSquare, targetSquare) === true) {
+        return true
+      }
+
     }
     if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
-      return true
+      if (RookBlockLogic("white", "black", orginSquare, targetSquare) === "not blocked") {
+        return true
+      }
+
+    } else {
+      return false
+    }
+  }
+
+  if (pieceId === "blackQueen") {
+    let diff = targetSquareNumber - orginSquareNumber;
+    let indexOfLetter = chessboardLetters.indexOf(orginSquareLetter);
+    if (targetSquareLetter === chessboardLetters[indexOfLetter + diff] || targetSquareLetter === chessboardLetters[indexOfLetter - diff]) {
+      if (BishopBlockLogic("black", "white", orginSquare, targetSquare) === true) {
+        return true
+      }
+
+    }
+    if (orginSquareLetter === targetSquareLetter || orginSquareNumber === targetSquareNumber) {
+      if (RookBlockLogic("white", "black", orginSquare, targetSquare) === "not blocked") {
+        return true
+      }
+
     } else {
       return false
     }
